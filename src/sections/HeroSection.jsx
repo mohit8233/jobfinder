@@ -11,7 +11,7 @@ const HeroSection = ({
       className="relative min-h-screen bg-cover bg-center flex items-center"
       style={{
         backgroundImage:
-          "url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80')",
+          "url('https://clickncash.in/wp-content/uploads/2021/02/job_search_portals.png')",
       }}
     >
       <div className="absolute inset-0 bg-black/65"></div>
