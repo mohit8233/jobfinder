@@ -18,27 +18,52 @@ const companyLogos = {
   "PeopleCorp": "https://preview.colorlib.com/theme/joblab/assets/img/icon/company-logo5.svg",
   "FinEdge": "https://www.svgrepo.com/show/508699/building.svg",
   "DesignPro": "https://www.svgrepo.com/show/508699/building.svg",
+  "PixelCraft Studio": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
 };
 
 const JobGrid = ({ searchTitle, searchLocation, jobsData }) => {
+  // console.log("JobGrid Rendered");
   const [activeCategory, setActiveCategory] = useState("All");
+     const sendEmail = (job) => {
+  const templateParams = {
+    job_title: job.title,
+    company: job.company,
+    name: "Website User",
+    email: "no-reply@yourwebsite.com",
+    message: `Someone applied for ${job.title}`,
+  };
 
-  const filteredJobs = jobsData
-    .filter((job) => {
-      const matchesCategory =
-        activeCategory === "All" || job.category === activeCategory;
-
-      const matchesTitle = job.title
-        .toLowerCase()
-        .includes(searchTitle.toLowerCase());
-
-      const matchesLocation = job.location
-        .toLowerCase()
-        .includes(searchLocation.toLowerCase());
-
-      return matchesCategory && matchesTitle && matchesLocation;
+  emailjs
+    .send(
+      "service_fhcugrp",
+      "template_p1ewxcb",
+      templateParams,
+      "RJZAjPIN6Mw_xKrte"
+    )
+    .then(() => {
+      alert("Application Sent Successfully 🚀");
     })
-    .slice(0, 8);
+    .catch((error) => {
+      console.log(error);
+      alert("Failed to send ❌");
+    });
+};
+  const filteredJobs = jobsData
+  .filter((job) => {
+    const matchesCategory =
+      activeCategory === "All" || job.category === activeCategory;
+
+    const matchesTitle = job.title
+      .toLowerCase()
+      .includes(searchTitle.toLowerCase());
+
+    const matchesLocation = job.location
+      .toLowerCase()
+      .includes(searchLocation.toLowerCase());
+
+    return matchesCategory && matchesTitle && matchesLocation;
+  });
+    
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-20">
@@ -106,13 +131,11 @@ const JobGrid = ({ searchTitle, searchLocation, jobsData }) => {
 
               <div className="mt-4 flex justify-end">
                 <button
-                  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-                  onClick={() =>
-                    alert(`Applied to ${job.title} at ${job.company}`)
-                  }
-                >
-                  Apply →
-                </button>
+  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+  onClick={() => sendEmail(job)}
+>
+  Apply →
+</button>
               </div>
             </div>
           ))

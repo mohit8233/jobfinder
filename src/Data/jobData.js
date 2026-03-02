@@ -71,6 +71,15 @@ const jobsData = [
     time: "1d ago",
     category: "Creative",
   },
+  {
+  id: 9,
+  title: "UI/UX Designer",
+  location: "Remote",
+  type: "Full-Time",
+  category: "Creative",
+  company: "PixelCraft Studio",
+  time: "2d ago"
+},
 ];
 
 export default jobsData ;

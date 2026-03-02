@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from './components/Header'
 import HeroSection from './sections/HeroSection'
 import JobGrid from './sections/JobGrid'
 import Talent from './sections/Talent'
 import WhyChooseUs from './sections/WhyChooseUs'
+import jobsData from "./Data/jobData";
 
 
 const App = () => {
