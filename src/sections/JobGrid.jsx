@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import category from "../Data/categories";
+import emailjs from "@emailjs/browser";
 
 const categoryColors = {
   Creative: "bg-pink-100 text-pink-600",
