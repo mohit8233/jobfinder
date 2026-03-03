@@ -1,33 +1,26 @@
-import React, { useState } from 'react'
-import Header from './components/Header'
-import HeroSection from './sections/HeroSection'
-import JobGrid from './sections/JobGrid'
-import Talent from './sections/Talent'
-import WhyChooseUs from './sections/WhyChooseUs'
-import jobsData from "./Data/jobData";
+
+import { Route, Routes } from 'react-router-dom'
+import Home from './pages/Home'
+import Jobs from './pages/Jobs'
+import Companies from './pages/Companies'
+import About from './pages/About'
+import Contact from './pages/Contact'
 
 
 const App = () => {
 
-   const [searchTitle, setSearchTitle] = useState("");
-  const [searchLocation, setSearchLocation] = useState("");
   return (
     <div>
-           <Header/>
-           <HeroSection
-        searchTitle={searchTitle}
-        setSearchTitle={setSearchTitle}
-        searchLocation={searchLocation}
-        setSearchLocation={setSearchLocation}
-      />
+         
 
-      <JobGrid
-        searchTitle={searchTitle}
-        searchLocation={searchLocation}
-        jobsData={jobsData}
-      />
-          <Talent/>
-          <WhyChooseUs/>
+          <Routes>
+            <Route path='/' element={<Home/>} />
+            <Route path='/jobs' element={<Jobs/>} />
+            <Route path='/companies' element={<Companies/>} />
+            <Route path='/about' element={<About/>} />
+            <Route path='/contact' element={<Contact/>} />
+
+          </Routes>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaBars, FaTimes, FaBriefcase } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,11 +19,13 @@ const Header = () => {
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center gap-8 text-gray-300 font-medium">
-          <a href="#" className="hover:text-blue-600">Home</a>
-          <a href="#" className="hover:text-blue-600">Jobs</a>
-          <a href="#" className="hover:text-blue-600">Companies</a>
-          <a href="#" className="hover:text-blue-600">About</a>
-          <a href="#" className="hover:text-blue-600">Contact</a>
+          
+        <Link to="/" className="hover:text-blue-600">Home</Link>
+          <Link to="/jobs" className="hover:text-blue-600">Jobs</Link>
+          <Link to="/companies" className="hover:text-blue-600">Companies</Link>
+          <Link to="/about" className="hover:text-blue-600">About</Link>
+          <Link to="/contact" className="hover:text-blue-600">Contact</Link>
+         
         </nav>
 
       
@@ -40,11 +43,11 @@ const Header = () => {
       {menuOpen && (
         <div className="md:hidden bg-white border-t">
           <nav className="flex flex-col px-6 py-4 gap-4 text-gray-700">
-            <a href="#">Home</a>
-            <a href="#">Jobs</a>
-            <a href="#">Companies</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
+             <Link to="/" className="hover:text-blue-600">Home</Link>
+          <Link to="/jobs" className="hover:text-blue-600">Jobs</Link>
+          <Link to="/companies" className="hover:text-blue-600">Companies</Link>
+          <Link to="/about" className="hover:text-blue-600">About</Link>
+          <Link to="/contact" className="hover:text-blue-600">Contact</Link>
         
           
           </nav>
