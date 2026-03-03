@@ -5,6 +5,7 @@ import Jobs from './pages/Jobs'
 import Companies from './pages/Companies'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import JobSection from './jobSection/JobSection'
 
 
 const App = () => {
@@ -19,7 +20,7 @@ const App = () => {
             <Route path='/companies' element={<Companies/>} />
             <Route path='/about' element={<About/>} />
             <Route path='/contact' element={<Contact/>} />
-
+             <Route path="/jobSection" element={<JobSection />} />
           </Routes>
     </div>
   )
