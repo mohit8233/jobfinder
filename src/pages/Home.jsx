@@ -8,6 +8,7 @@ import WhyChooseUs from '../honeSection/WhyChooseUs'
 import jobsData from "../Data/jobData";
 import ClientQuote from '../honeSection/ClientQuote';
 import  { useState } from "react";
+import Footer from '../components/Footer'
 
 
 const Home = () => {
@@ -32,6 +33,7 @@ const Home = () => {
           <Talent/>
           <WhyChooseUs/>
           <ClientQuote/>
+          <Footer/>
     </div>
   )
 }
