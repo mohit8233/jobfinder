@@ -105,51 +105,69 @@ const Header = () => {
       )}
 
       {/* ================= PROFILE MODAL ================= */}
-      {profileOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white w-96 rounded-xl shadow-2xl p-6 relative">
+     {menuOpen && (
+  <div className="md:hidden absolute top-[72px] left-0 w-full bg-blue-950 px-6 py-6 space-y-4 text-gray-300 shadow-lg z-40">
+    <Link 
+      to="/" 
+      onClick={() => setMenuOpen(false)} 
+      className="block hover:text-blue-400"
+    >
+      Home
+    </Link>
 
-            <button
-              onClick={() => setProfileOpen(false)}
-              className="absolute top-3 right-3 text-gray-500"
-            >
-              ✖
-            </button>
+    <Link 
+      to="/jobs" 
+      onClick={() => setMenuOpen(false)} 
+      className="block hover:text-blue-400"
+    >
+      Jobs
+    </Link>
 
-            {user && (
-              <>
-                {user.photoURL && (
-                  <img
-                    src={user.photoURL}
-                    alt="profile"
-                    className="w-24 h-24 rounded-full mx-auto mb-4"
-                  />
-                )}
+    <Link 
+      to="/companies" 
+      onClick={() => setMenuOpen(false)} 
+      className="block hover:text-blue-400"
+    >
+      Companies
+    </Link>
 
-                <h2 className="text-2xl font-bold text-center">
-                  {user.displayName || "User"}
-                </h2>
+    <Link 
+      to="/about" 
+      onClick={() => setMenuOpen(false)} 
+      className="block hover:text-blue-400"
+    >
+      About
+    </Link>
 
-                <p className="text-center text-gray-600 mb-4">
-                  {user.email}
-                </p>
+    <Link 
+      to="/contact" 
+      onClick={() => setMenuOpen(false)} 
+      className="block hover:text-blue-400"
+    >
+      Contact
+    </Link>
 
-                <div className="bg-gray-100 p-3 rounded-lg text-sm mb-4">
-                  <p><strong>User ID:</strong></p>
-                  <p className="break-all">{user.uid}</p>
-                </div>
-
-                <button
-                  onClick={handleLogout}
-                  className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition"
-                >
-                  Logout
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-      )}
+    {!user ? (
+      <Link 
+        to="/login" 
+        onClick={() => setMenuOpen(false)} 
+        className="block text-white hover:text-blue-400"
+      >
+        Login
+      </Link>
+    ) : (
+      <button
+        onClick={() => {
+          setProfileOpen(true);
+          setMenuOpen(false);
+        }}
+        className="block text-left text-white hover:text-blue-400"
+      >
+        Profile
+      </button>
+    )}
+  </div>
+)}
     </>
   );
 };
