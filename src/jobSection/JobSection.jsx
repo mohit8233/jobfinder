@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import emailjs from "@emailjs/browser";
-
+import ApplyForm from "../components/ApplyForm";
 
 // Sample jobs data (20+ jobs)
 const jobsData = [
@@ -30,35 +29,13 @@ const jobsData = [
 
 const JobSection = () => {
   const navigate = useNavigate();
+  const [selectedJob, setSelectedJob] = useState(null);
 
- const sendEmail = (job) => {
-  const templateParams = {
-    job_title: job.title,
-    company: job.company,
-    name: "Website User",
-    email: "no-reply@yourwebsite.com",
-    message: `Someone applied for ${job.title}`,
-  };
-
-  emailjs
-    .send(
-      "service_fhcugrp",
-      "template_p1ewxcb",
-      templateParams,
-      "RJZAjPIN6Mw_xKrte"
-    )
-    .then(() => {
-      alert("Application Sent Successfully 🚀");
-    })
-    .catch((error) => {
-      console.log(error);
-      alert("Failed to send ❌");
-    });
-};
-   
   return (
     <section className="py-10 px-6 bg-gray-100 min-h-screen">
-      <h1 className="text-3xl font-bold mb-8 text-center">All Available Jobs</h1>
+      <h1 className="text-3xl font-bold mb-8 text-center">
+        All Available Jobs
+      </h1>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {jobsData.map((job) => (
@@ -69,16 +46,27 @@ const JobSection = () => {
             <h2 className="text-2xl font-semibold mb-2">{job.title}</h2>
             <p className="text-gray-600 mb-1">{job.company}</p>
             <p className="text-gray-600 mb-1">{job.location}</p>
-            <p className="font-medium mb-4">{job.salary} | {job.type}</p>
+            <p className="font-medium mb-4">
+              {job.salary} | {job.type}
+            </p>
+
             <button
-  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-  onClick={() => sendEmail(job)}
->
-  Apply →
-</button>
+              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+              onClick={() => setSelectedJob(job)}
+            >
+              Apply →
+            </button>
           </div>
         ))}
       </div>
+
+      {/* Apply Modal */}
+      {selectedJob && (
+        <ApplyForm
+          job={selectedJob}
+          onClose={() => setSelectedJob(null)}
+        />
+      )}
     </section>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import category from "../Data/categories";
-import emailjs from "@emailjs/browser";
+import ApplyForm from "../components/ApplyForm";
 
 const categoryColors = {
   Creative: "bg-pink-100 text-pink-600",
@@ -23,34 +23,10 @@ const companyLogos = {
 };
 
 const JobGrid = ({ searchTitle, searchLocation, jobsData }) => {
-  // console.log("JobGrid Rendered");
   const [activeCategory, setActiveCategory] = useState("All");
-     const sendEmail = (job) => {
-  const templateParams = {
-    job_title: job.title,
-    company: job.company,
-    name: "Website User",
-    email: "no-reply@yourwebsite.com",
-    message: `Someone applied for ${job.title}`,
-  };
+  const [selectedJob, setSelectedJob] = useState(null);
 
-  emailjs
-    .send(
-      "service_fhcugrp",
-      "template_p1ewxcb",
-      templateParams,
-      "RJZAjPIN6Mw_xKrte"
-    )
-    .then(() => {
-      alert("Application Sent Successfully 🚀");
-    })
-    .catch((error) => {
-      console.log(error);
-      alert("Failed to send ❌");
-    });
-};
-  const filteredJobs = jobsData
-  .filter((job) => {
+  const filteredJobs = jobsData.filter((job) => {
     const matchesCategory =
       activeCategory === "All" || job.category === activeCategory;
 
@@ -64,7 +40,6 @@ const JobGrid = ({ searchTitle, searchLocation, jobsData }) => {
 
     return matchesCategory && matchesTitle && matchesLocation;
   });
-    
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-20">
@@ -132,11 +107,11 @@ const JobGrid = ({ searchTitle, searchLocation, jobsData }) => {
 
               <div className="mt-4 flex justify-end">
                 <button
-  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-  onClick={() => sendEmail(job)}
->
-  Apply →
-</button>
+                  onClick={() => setSelectedJob(job)}
+                  className="bg-blue-600 text-white px-4 py-2 rounded"
+                >
+                  Apply Now
+                </button>
               </div>
             </div>
           ))
@@ -146,6 +121,14 @@ const JobGrid = ({ searchTitle, searchLocation, jobsData }) => {
           </p>
         )}
       </div>
+
+      {/* Apply Modal */}
+      {selectedJob && (
+        <ApplyForm
+          job={selectedJob}
+          onClose={() => setSelectedJob(null)}
+        />
+      )}
     </section>
   );
 };

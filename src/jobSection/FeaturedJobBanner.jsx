@@ -55,7 +55,7 @@ const ModernJobBanner = () => {
 
           {/* Buttons */}
           <div className="flex gap-4 flex-wrap">
-            <button className="bg-white text-pink-500 font-bold px-8 py-3 rounded-lg hover:scale-105 transform transition duration-300">
+            <button className="bg-white text-pink-500 font-bold px-8 py-3 rounded-lg hover:scale-105 transform transition duration-300"   onClick={goToJobs}>
               Apply Now
             </button>
             <button className="bg-transparent border border-white text-white font-bold px-8 py-3 rounded-lg hover:bg-white hover:text-pink-500 transition" 
