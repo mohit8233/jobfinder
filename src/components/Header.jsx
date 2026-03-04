@@ -9,6 +9,7 @@ const Header = () => {
   const [profileOpen, setProfileOpen] = useState(false);
   const [user, setUser] = useState(null);
 
+  // 🔥 Firebase Auth Listener
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -19,10 +20,12 @@ const Header = () => {
   const handleLogout = async () => {
     await signOut(auth);
     setProfileOpen(false);
+    setMenuOpen(false);
   };
 
   return (
     <>
+      {/* ================= HEADER ================= */}
       <header className="sticky top-0 z-50 bg-blue-950 border-b shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
 
@@ -64,6 +67,7 @@ const Header = () => {
             )}
           </nav>
 
+          {/* Hamburger Button */}
           <button
             className="md:hidden text-2xl text-white"
             onClick={() => setMenuOpen(!menuOpen)}
@@ -73,7 +77,34 @@ const Header = () => {
         </div>
       </header>
 
-      {/* 🔥 PROFILE MODAL */}
+      {/* ================= MOBILE MENU ================= */}
+      {menuOpen && (
+        <div className="md:hidden bg-blue-950 px-6 py-4 space-y-4 text-gray-300">
+          <Link to="/" onClick={() => setMenuOpen(false)} className="block hover:text-blue-400">Home</Link>
+          <Link to="/jobs" onClick={() => setMenuOpen(false)} className="block hover:text-blue-400">Jobs</Link>
+          <Link to="/companies" onClick={() => setMenuOpen(false)} className="block hover:text-blue-400">Companies</Link>
+          <Link to="/about" onClick={() => setMenuOpen(false)} className="block hover:text-blue-400">About</Link>
+          <Link to="/contact" onClick={() => setMenuOpen(false)} className="block hover:text-blue-400">Contact</Link>
+
+          {!user ? (
+            <Link to="/login" onClick={() => setMenuOpen(false)} className="block text-white hover:text-blue-400">
+              Login
+            </Link>
+          ) : (
+            <button
+              onClick={() => {
+                setProfileOpen(true);
+                setMenuOpen(false);
+              }}
+              className="block text-left text-white hover:text-blue-400"
+            >
+              Profile
+            </button>
+          )}
+        </div>
+      )}
+
+      {/* ================= PROFILE MODAL ================= */}
       {profileOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white w-96 rounded-xl shadow-2xl p-6 relative">
