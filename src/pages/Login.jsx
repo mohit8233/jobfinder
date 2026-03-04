@@ -8,6 +8,8 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -43,6 +45,8 @@ const Login = () => {
   };
 
   return (
+    <>
+    <Header/>
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 shadow-xl rounded-xl w-96">
         <h2 className="text-2xl font-bold text-center mb-6">
@@ -88,6 +92,8 @@ const Login = () => {
         </p>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

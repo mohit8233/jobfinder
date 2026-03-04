@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ApplyForm from "../components/ApplyForm";
+import { auth } from "../firebase";
 
 // Sample jobs data (20+ jobs)
 const jobsData = [
@@ -30,7 +31,19 @@ const jobsData = [
 const JobSection = () => {
   const navigate = useNavigate();
   const [selectedJob, setSelectedJob] = useState(null);
+      
+  const handleApply = (job) => {
+  const user = auth.currentUser;
 
+  if (!user) {
+    // ❌ Login nahi hai
+    navigate("/login");
+    return;
+  }
+
+  // ✅ Login hai
+  setSelectedJob(job);
+};
   return (
     <section className="py-10 px-6 bg-gray-100 min-h-screen">
       <h1 className="text-3xl font-bold mb-8 text-center">
@@ -50,12 +63,12 @@ const JobSection = () => {
               {job.salary} | {job.type}
             </p>
 
-            <button
-              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-              onClick={() => setSelectedJob(job)}
-            >
-              Apply →
-            </button>
+           <button
+  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+  onClick={() => handleApply(job)}
+>
+  Apply →
+</button>
           </div>
         ))}
       </div>

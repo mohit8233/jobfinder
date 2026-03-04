@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import category from "../Data/categories";
 import ApplyForm from "../components/ApplyForm";
+import { auth } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 const categoryColors = {
   Creative: "bg-pink-100 text-pink-600",
@@ -25,6 +27,20 @@ const companyLogos = {
 const JobGrid = ({ searchTitle, searchLocation, jobsData }) => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedJob, setSelectedJob] = useState(null);
+     const navigate = useNavigate();
+const handleApply = (job) => {
+  const user = auth.currentUser;
+
+  if (!user) {
+    // ❌ Login nahi hai
+    navigate("/login");
+    return;
+  }
+
+  // ✅ Login hai
+  setSelectedJob(job);
+};
+    
 
   const filteredJobs = jobsData.filter((job) => {
     const matchesCategory =
@@ -107,11 +123,11 @@ const JobGrid = ({ searchTitle, searchLocation, jobsData }) => {
 
               <div className="mt-4 flex justify-end">
                 <button
-                  onClick={() => setSelectedJob(job)}
-                  className="bg-blue-600 text-white px-4 py-2 rounded"
-                >
-                  Apply Now
-                </button>
+  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+  onClick={() => handleApply(job)}
+>
+  Apply →
+</button>
               </div>
             </div>
           ))
