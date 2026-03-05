@@ -19,7 +19,7 @@ const Login = () => {
 
   const provider = new GoogleAuthProvider();
 
-  // Email Login / Signup
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -30,13 +30,13 @@ const Login = () => {
         await createUserWithEmailAndPassword(auth, email, password);
       }
 
-      navigate("/"); // login ke baad home
+      navigate("/");
     } catch (error) {
       alert(error.message);
     }
   };
 
-  // Google Login (Mobile Safe)
+ 
   const handleGoogleLogin = async () => {
     try {
       await signInWithRedirect(auth, provider);
@@ -45,7 +45,7 @@ const Login = () => {
     }
   };
 
-  // Redirect result handle
+  
   useEffect(() => {
     getRedirectResult(auth)
       .then((result) => {

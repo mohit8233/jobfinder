@@ -19,7 +19,7 @@ const companyLogos = {
   "AdWorld Pvt Ltd": "https://preview.colorlib.com/theme/joblab/assets/img/icon/company-logo2.svg",
   "TechSoft": "https://preview.colorlib.com/theme/joblab/assets/img/icon/company-logo3.svg",
   "PeopleCorp": "https://preview.colorlib.com/theme/joblab/assets/img/icon/company-logo5.svg",
-  "FinEdge": "https://www.svgrepo.com/show/508699/building.svg",
+  "FinEdge": "http://preview.colorlib.com/theme/joblab/assets/img/icon/company-logo2.svg",
   "DesignPro": "https://www.svgrepo.com/show/508699/building.svg",
   "PixelCraft Studio": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
 };

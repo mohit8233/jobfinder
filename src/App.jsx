@@ -5,8 +5,6 @@ import Companies from "./pages/Companies";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
 
 import PrivateRoute from "./components/PrivateRoute";
 import JobSection from "./jobSection/JobSection";
@@ -23,23 +21,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
          <Route path="/jobSection" element={<JobSection/>} />
 
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="/profile"
-          element={
-            <PrivateRoute>
-              <Profile />
-            </PrivateRoute>
-          }
-        />
+        
       </Routes>
     </div>
   );
