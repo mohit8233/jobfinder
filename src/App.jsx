@@ -14,9 +14,13 @@ import { useContext } from "react";
 const App = () => {
   const {theme} = useContext(ThemeContext)
   return (
-    <div className={`${theme === "light"
-      ? "bg-black text-white" : "bg-white text-black"
-    }`}>
+    <div
+  className={`${
+    theme === "light"
+      ? "bg-white text-black"
+      : "bg-gray-900 text-white"
+  } min-h-screen`}
+>
     
       <Routes>
         <Route path="/" element={<Home />} />
