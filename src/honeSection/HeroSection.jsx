@@ -21,7 +21,7 @@ const HeroSection = ({
           <div className="max-w-3xl text-left text-white">
             <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
               Build Your Career with
-              <span className="text-blue-400"> JobFinder</span>
+              <span className="text-blue-400"> WorkNest</span>
             </h1>
 
             <p className="mt-5 text-xl text-white/90">

@@ -8,10 +8,10 @@ const Footer = () => {
 
                 {/* Left Section */}
                 <div>
-                    <h2 className="text-2xl font-bold text-white">Job<span className="text-blue-600">Finder</span></h2>
+                    <h2 className="text-2xl font-bold text-white">Work<span className="text-blue-600">Nest</span></h2>
 
                     <p className="mt-4 text-sm leading-relaxed text-gray-400">
-                        JobFinder is a modern job portal designed to connect talented
+                        WorkNest is a modern job portal designed to connect talented
                         professionals with top companies. Find your dream job quickly
                         and efficiently with our smart search system.
                     </p>
@@ -72,7 +72,7 @@ const Footer = () => {
 
             {/* Bottom Copyright */}
             <div className="border-t border-gray-800 mt-12 pt-6 text-center text-sm text-gray-500">
-                © {new Date().getFullYear()} JobFinder. All Rights Reserved.
+                © {new Date().getFullYear()} WorkNest. All Rights Reserved.
             </div>
         </footer>
     );

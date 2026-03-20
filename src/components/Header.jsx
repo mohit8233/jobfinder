@@ -41,7 +41,7 @@ const Header = () => {
           <div className="flex items-center gap-2">
             <FaBriefcase className="text-blue-100 text-2xl" />
             <span className="text-2xl font-bold text-white">
-              Job<span className="text-blue-600">Finder</span>
+              Work<span className="text-blue-600">Nest</span>
             </span>
           </div>
 

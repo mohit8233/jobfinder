@@ -3,6 +3,7 @@ import category from "../Data/categories";
 import ApplyForm from "../components/ApplyForm";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import withUpcomingHighlight from "../hoc/withUpcomingHighlight";
 
 const categoryColors = {
   Creative: "bg-pink-100 text-pink-600",
@@ -11,6 +12,7 @@ const categoryColors = {
   Corporate: "bg-gray-100 text-gray-700",
   Finance: "bg-green-100 text-green-600",
   Medical: "bg-red-100 text-red-600",
+  Upcoming: "bg-red-100 text-red-600",
   All: "bg-blue-100 text-blue-600",
 };
 
@@ -24,24 +26,90 @@ const companyLogos = {
   "PixelCraft Studio": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
 };
 
+
+
+
+const JobCard = ({ job, handleApply, isUpcoming }) => {
+  return (
+    <div
+      className={`rounded-2xl p-7 transition
+      ${
+        isUpcoming
+          ? "bg-transparent"   
+          : "bg-white border shadow-sm hover:shadow-xl"
+      }
+      `}
+    >
+
+      <span
+        className={`inline-block mb-4 text-xs font-semibold px-4 py-1 rounded-full 
+        ${categoryColors[job.category] || "bg-slate-100 text-slate-600"}`}
+      >
+        {job.category}
+      </span>
+
+      <h3 className="text-lg font-bold text-gray-900 mb-3">
+        {job.title}
+      </h3>
+
+      <div className="flex items-center text-sm text-gray-500 gap-4 mb-6">
+        <span>📍 {job.location}</span>
+        <span>💼 {job.type}</span>
+      </div>
+
+      <div className="flex items-center justify-between pt-4 border-t">
+        <div className="flex items-center gap-2">
+          <img
+            src={
+              companyLogos[job.company] ||
+              "https://www.svgrepo.com/show/508699/building.svg"
+            }
+            alt={job.company}
+            className="w-6 h-6 object-contain"
+          />
+          <span className="font-semibold text-gray-700">
+            {job.company}
+          </span>
+        </div>
+        <span className="text-xs text-gray-400">{job.time}</span>
+      </div>
+
+      <div className="mt-4 flex justify-end">
+        <button
+          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+          onClick={() => handleApply(job)}
+        >
+          Apply →
+        </button>
+      </div>
+
+    </div>
+  );
+};
+
+
+
+const HighlightedCard = withUpcomingHighlight(JobCard);
+
+
+
 const JobGrid = ({ searchTitle, searchLocation, jobsData }) => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedJob, setSelectedJob] = useState(null);
-     const navigate = useNavigate();
-const handleApply = (job) => {
-  const user = auth.currentUser;
+  const navigate = useNavigate();
 
-  if (!user) {
-    // ❌ Login nahi hai
-    navigate("/login");
-    return;
-  }
+  const handleApply = (job) => {
+    const user = auth.currentUser;
 
-  // ✅ Login hai
-  setSelectedJob(job);
-};
-    
+    if (!user) {
+      navigate("/login");
+      return;
+    }
 
+    setSelectedJob(job);
+  };
+
+  // 🔍 filtering
   const filteredJobs = jobsData.filter((job) => {
     const matchesCategory =
       activeCategory === "All" || job.category === activeCategory;
@@ -84,52 +152,11 @@ const handleApply = (job) => {
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {filteredJobs.length > 0 ? (
           filteredJobs.map((job) => (
-            <div
+            <HighlightedCard
               key={job.id}
-              className="bg-white rounded-2xl p-7 shadow-sm hover:shadow-xl transition border"
-            >
-              <span
-                className={`inline-block mb-4 text-xs font-semibold px-4 py-1 rounded-full 
-                ${categoryColors[job.category] || "bg-slate-100 text-slate-600"}`}
-              >
-                {job.category}
-              </span>
-
-              <h3 className="text-lg font-bold text-gray-900 mb-3">
-                {job.title}
-              </h3>
-
-              <div className="flex items-center text-sm text-gray-500 gap-4 mb-6">
-                <span>📍 {job.location}</span>
-                <span>💼 {job.type}</span>
-              </div>
-
-              <div className="flex items-center justify-between pt-4 border-t">
-                <div className="flex items-center gap-2">
-                  <img
-                    src={
-                      companyLogos[job.company] ||
-                      "https://www.svgrepo.com/show/508699/building.svg"
-                    }
-                    alt={job.company}
-                    className="w-6 h-6 object-contain"
-                  />
-                  <span className="font-semibold text-gray-700">
-                    {job.company}
-                  </span>
-                </div>
-                <span className="text-xs text-gray-400">{job.time}</span>
-              </div>
-
-              <div className="mt-4 flex justify-end">
-                <button
-  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
-  onClick={() => handleApply(job)}
->
-  Apply →
-</button>
-              </div>
-            </div>
+              job={job}
+              handleApply={handleApply}
+            />
           ))
         ) : (
           <p className="col-span-3 text-center text-lg font-semibold text-gray-500">

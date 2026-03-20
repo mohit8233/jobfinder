@@ -4,21 +4,21 @@ const testimonials = [
   {
     id: 1,
     quote:
-      "JobFinder has completely transformed our hiring process. The platform is fast, reliable, and connects us with top-quality candidates effortlessly.",
+      "WorkNest has completely transformed our hiring process. The platform is fast, reliable, and connects us with top-quality candidates effortlessly.",
     name: "Rahul Mehta",
     role: "HR Manager, TechVision Pvt Ltd",
   },
   {
     id: 2,
     quote:
-      "We were able to fill multiple positions within weeks thanks to JobFinder. The user experience is smooth and extremely professional.",
+      "We were able to fill multiple positions within weeks thanks to WorkNest. The user experience is smooth and extremely professional.",
     name: "Sneha Kapoor",
     role: "Talent Acquisition Lead, CodeCraft",
   },
   {
     id: 3,
     quote:
-      "JobFinder stands out from other platforms. It is simple, powerful, and truly designed for modern recruitment needs.",
+      "WorkNest stands out from other platforms. It is simple, powerful, and truly designed for modern recruitment needs.",
     name: "Amit Sharma",
     role: "CEO, InnovateX Solutions",
   },

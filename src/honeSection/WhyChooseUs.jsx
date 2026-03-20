@@ -6,7 +6,7 @@ const WhyChooseUs = () => {
     <section className="w-full min-h-screen mt-11 bg-blue-50 flex items-center justify-center overflow-hidden px-6">
       <div className="w-full max-w-[1200px] grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-        {/* Left Side */}
+       
         <motion.div
           initial={{ opacity: 0, x: -60 }}
           animate={{ opacity: 1, x: 0 }}

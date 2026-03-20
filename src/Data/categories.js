@@ -6,6 +6,7 @@ const category = [
   "Corporate",
   "Finance",
   "Medical",
+  "UpComing"
 ];
 
 export default category;

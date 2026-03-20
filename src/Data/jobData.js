@@ -1,3 +1,6 @@
+import { title } from "framer-motion/client";
+import category from "./categories";
+
 const jobsData = [
   {
     id: 1,
@@ -80,6 +83,43 @@ const jobsData = [
   company: "PixelCraft Studio",
   time: "2d ago"
 },
+{
+    id: 10,
+    title: "Frontend Developer",
+    location: "OnSite",
+    type: "Full Time",
+    company: "TechSoft",
+    time: "3h ago",
+    category: "IT",
+  },
+  {
+    id: 11,
+    title: "Backend Developer",
+    location: "Remote",
+    type: "Part Time",
+    company: "TechSoft",
+    time: "10m ago",
+    category: "IT",
+  },
+  {
+    id: 12,
+    title: "Full stack Developer",
+    location: "Remote/On-Site",
+    type: "Full Time",
+    company: "TechSoft",
+    time: "3m ago",
+    category: "IT",
+  },
+  {
+    id: 13,
+    title: "Marketing Head",
+    location:"On-Site",
+    type: "Full Time",
+    company: "PixelCraft Studio",
+    time:"UpComing Time",
+    category: "UpComing",
+    date: "2026-05-25"
+  }
 ];
 
 export default jobsData ;
