@@ -36,16 +36,16 @@ const JobSection = () => {
   const user = auth.currentUser;
 
   if (!user) {
-    // ❌ Login nahi hai
+    
     navigate("/login");
     return;
   }
 
-  // ✅ Login hai
+  
   setSelectedJob(job);
 };
   return (
-    <section className="py-10 px-6 bg-gray-100 min-h-screen">
+    <section className="py-10 px-6  min-h-screen">
       <h1 className="text-3xl font-bold mb-8 text-center">
         All Available Jobs
       </h1>
@@ -54,7 +54,7 @@ const JobSection = () => {
         {jobsData.map((job) => (
           <div
             key={job.id}
-            className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition"
+               className="bg-gray-300 p-6 rounded-2xl shadow-md hover:shadow-xl transition"
           >
             <h2 className="text-2xl font-semibold mb-2">{job.title}</h2>
             <p className="text-gray-600 mb-1">{job.company}</p>

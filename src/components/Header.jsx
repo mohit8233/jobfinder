@@ -1,16 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { FaBars, FaTimes, FaBriefcase, FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { auth } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { ThemeContext } from "../ThemeContext/ThemeContext";
 
 const Header = () => {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [user, setUser] = useState(null);
-
-  // Firebase Auth Listener
+   const { theme, toggleTheme } = useContext(ThemeContext);
+   
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -46,7 +47,7 @@ const Header = () => {
 
           {/* Desktop Menu */}
 
-          <nav className="hidden md:flex items-center gap-8 text-gray-300 font-medium">
+         <nav className="hidden md:flex items-center gap-8 text-gray-300 font-medium">
 
             <Link to="/" className="hover:text-blue-400">
               Home
@@ -67,7 +68,12 @@ const Header = () => {
             <Link to="/contact" className="hover:text-blue-400">
               Contact
             </Link>
-
+                 <button
+          onClick={toggleTheme}
+          className="px-3 py-1 rounded"
+        >
+          {theme === "light" ? "☀️" : "🌙"}
+        </button>
 
             {!user ? (
 
@@ -102,9 +108,9 @@ const Header = () => {
                   )}
 
                 </button>
+              
 
-
-                {/* Profile Dropdown */}
+            
 
                 {profileOpen && (
 
@@ -132,7 +138,7 @@ const Header = () => {
           </nav>
 
 
-          {/* Hamburger Button */}
+         
 
           <button
             className="md:hidden text-2xl text-white"
@@ -192,7 +198,9 @@ const Header = () => {
             Contact
           </Link>
 
-
+            <button onClick={toggleTheme}>
+            {theme === "light" ? "☀️" : " 🌙"}
+          </button>
           {!user ? (
 
             <Link

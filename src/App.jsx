@@ -8,10 +8,16 @@ import Login from "./pages/Login";
 
 import PrivateRoute from "./components/PrivateRoute";
 import JobSection from "./jobSection/JobSection";
+import { ThemeContext,  } from "./ThemeContext/ThemeContext";
+import { useContext } from "react";
 
 const App = () => {
+  const {theme} = useContext(ThemeContext)
   return (
-    <div>
+    <div className={`${theme === "light"
+      ? "bg-black text-white" : "bg-white text-black"
+    }`}>
+    
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />
@@ -19,10 +25,9 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
-         <Route path="/jobSection" element={<JobSection/>} />
-
-        
+        <Route path="/jobSection" element={<JobSection/>} />
       </Routes>
+    
     </div>
   );
 };
