@@ -1,29 +1,36 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
-
   const [theme, setTheme] = useState("light");
 
-  // ✅ missing function add karo
+  // Load saved theme
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) setTheme(savedTheme);
+  }, []);
+
   const toggleTheme = () => {
-    setTheme(prev => (prev === "light" ? "dark" : "light"));
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
+
+ 
+  useEffect(() => {
+    const root = document.documentElement;
+
+    if (theme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      
-      <div
-        className={
-          theme === "light"
-            ? "bg-white text-black min-h-screen"
-            : "bg-gray-900 text-white min-h-screen"
-        }
-      >
-        {children}
-      </div>
-
+      {children}
     </ThemeContext.Provider>
   );
 };

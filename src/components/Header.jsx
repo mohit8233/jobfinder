@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { FaBars, FaTimes, FaBriefcase, FaUserCircle } from "react-icons/fa";
+import { FaBars, FaTimes, FaBriefcase, FaUserCircle, FaSun, FaMoon } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { auth } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -25,7 +25,6 @@ const Header = () => {
     setMenuOpen(false);
   };
 
-  // ✅ Active class
   const navClass = ({ isActive }) =>
     isActive
       ? "text-blue-400 border-b-2 border-blue-400 pb-1"
@@ -34,19 +33,21 @@ const Header = () => {
   return (
     <>
       {/* ================= HEADER ================= */}
-      <header className="sticky top-0 z-50 bg-blue-950 border-b shadow-sm">
+      <header className="sticky top-0 z-50 border-b shadow-sm 
+bg-blue-950 text-white 
+dark:bg-gray-900 dark:text-white">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
 
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <FaBriefcase className="text-blue-100 text-2xl" />
-            <span className="text-2xl font-bold text-white">
+            <FaBriefcase className="text-2xl" />
+            <span className="text-2xl font-bold">
               Work<span className="text-blue-600">Nest</span>
             </span>
           </div>
 
           {/* Desktop Menu */}
-          <nav className="hidden md:flex items-center gap-8 text-gray-300 font-medium">
+          <nav className="hidden md:flex items-center gap-8 font-medium">
 
             <NavLink to="/" end className={navClass}>Home</NavLink>
             <NavLink to="/jobs" className={navClass}>Jobs</NavLink>
@@ -54,23 +55,15 @@ const Header = () => {
             <NavLink to="/about" className={navClass}>About</NavLink>
             <NavLink to="/contact" className={navClass}>Contact</NavLink>
 
-            {/* Theme Toggle */}
-            <button onClick={toggleTheme} className="px-3 py-1 rounded text-white">
-              {theme === "light" ? "☀️" : "🌙"}
-            </button>
-
             {/* Auth */}
             {!user ? (
-              <NavLink to="/login" className="text-white hover:text-blue-400">
+              <NavLink to="/login" className="hover:text-blue-400">
                 Login
               </NavLink>
             ) : (
               <div className="relative">
-                <button
-                  onClick={() => setProfileOpen(!profileOpen)}
-                  className="text-white text-2xl hover:text-blue-400"
-                >
-                  {user.photoURL ? (
+                <NavLink to="/dashboard" className="text-white text-2xl hover:text-blue-400">
+                  {user?.photoURL ? (
                     <img
                       src={user.photoURL}
                       alt="profile"
@@ -79,78 +72,76 @@ const Header = () => {
                   ) : (
                     <FaUserCircle />
                   )}
-                </button>
+                </NavLink>
 
-                {profileOpen && (
-                  <div className="absolute right-0 mt-3 bg-white shadow-lg rounded-lg p-4 w-56">
-                    <p className="text-gray-700 text-sm mb-3">
-                      {user.email}
-                    </p>
-
-                    <button
-                      onClick={handleLogout}
-                      className="w-full bg-red-500 text-white py-2 rounded hover:bg-red-600"
-                    >
-                      Logout
-                    </button>
-                  </div>
-                )}
+              
               </div>
             )}
+
+
+            <button
+              onClick={toggleTheme}
+              className="hidden md:block p-2 rounded-full bg-gray-800 text-white  transition"
+            >
+              {theme === "light" ? <FaMoon /> : <FaSun />}
+            </button>
+
           </nav>
 
-          {/* Mobile Icon */}
-          <button
-            className="md:hidden text-2xl text-white"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            {menuOpen ? <FaTimes /> : <FaBars />}
-          </button>
+
+          <div className="flex items-center gap-3 md:hidden">
+
+
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition"
+            >
+              {theme === "light" ? <FaMoon /> : <FaSun />}
+            </button>
+
+
+            <button
+              className="text-2xl text-white"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              {menuOpen ? <FaTimes /> : <FaBars />}
+            </button>
+
+          </div>
         </div>
       </header>
 
-      {/* ================= MOBILE MENU ================= */}
+
       {menuOpen && (
-        <div className="md:hidden bg-blue-950 px-6 py-6 space-y-4 text-gray-300 shadow-lg">
+        <div className="md:hidden px-6 py-6 shadow-lg 
+        bg-blue-950 text-gray-300 
+        dark:bg-gray-900 dark:text-white 
+        flex flex-col gap-5">
 
-          <NavLink to="/" end onClick={() => setMenuOpen(false)} className={navClass}>
-            Home
-          </NavLink>
 
-          <NavLink to="/jobs" onClick={() => setMenuOpen(false)} className={navClass}>
-            Jobs
-          </NavLink>
+          <div className="flex flex-col gap-4 text-lg">
+            <NavLink to="/" onClick={() => setMenuOpen(false)} className={navClass}>Home</NavLink>
+            <NavLink to="/jobs" onClick={() => setMenuOpen(false)} className={navClass}>Jobs</NavLink>
+            <NavLink to="/companies" onClick={() => setMenuOpen(false)} className={navClass}>Companies</NavLink>
+            <NavLink to="/about" onClick={() => setMenuOpen(false)} className={navClass}>About</NavLink>
+            <NavLink to="/contact" onClick={() => setMenuOpen(false)} className={navClass}>Contact</NavLink>
+          </div>
 
-          <NavLink to="/companies" onClick={() => setMenuOpen(false)} className={navClass}>
-            Companies
-          </NavLink>
+          <div className="border-t border-gray-700"></div>
 
-          <NavLink to="/about" onClick={() => setMenuOpen(false)} className={navClass}>
-            About
-          </NavLink>
-
-          <NavLink to="/contact" onClick={() => setMenuOpen(false)} className={navClass}>
-            Contact
-          </NavLink>
-
-          {/* Theme Toggle */}
-          <button onClick={toggleTheme} className="text-white">
-            {theme === "light" ? "☀️" : "🌙"}
-          </button>
-
-          {/* Auth */}
+          \
           {!user ? (
             <NavLink
               to="/login"
               onClick={() => setMenuOpen(false)}
-              className="block text-white hover:text-blue-400"
+              className="text-white font-semibold"
             >
               Login
             </NavLink>
           ) : (
             <button
               onClick={handleLogout}
-              className="block text-left text-white hover:text-blue-400"
+              className="text-red-400 font-semibold"
             >
               Logout
             </button>

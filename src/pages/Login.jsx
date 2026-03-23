@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { auth } from "../firebase";
 import {
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithRedirect,
@@ -12,31 +11,25 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const Login = () => {
-  const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const provider = new GoogleAuthProvider();
 
-
+  // ✅ Login
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      if (isLogin) {
-        await signInWithEmailAndPassword(auth, email, password);
-      } else {
-        await createUserWithEmailAndPassword(auth, email, password);
-      }
-
+      await signInWithEmailAndPassword(auth, email, password);
       navigate("/");
     } catch (error) {
       alert(error.message);
     }
   };
 
- 
+  // ✅ Google Login
   const handleGoogleLogin = async () => {
     try {
       await signInWithRedirect(auth, provider);
@@ -45,7 +38,7 @@ const Login = () => {
     }
   };
 
-  
+  // ✅ Redirect result
   useEffect(() => {
     getRedirectResult(auth)
       .then((result) => {
@@ -62,10 +55,10 @@ const Login = () => {
     <>
       <Header />
 
-      <div className="flex justify-center items-center min-h-screen bg-gray-100">
-        <div className="bg-white p-8 shadow-xl rounded-xl w-96">
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="bg-slate-400 p-8 shadow-xl rounded-xl w-96">
           <h2 className="text-2xl font-bold text-center mb-6">
-            {isLogin ? "Login" : "Sign Up"}
+            Login
           </h2>
 
           <form onSubmit={handleSubmit}>
@@ -89,13 +82,13 @@ const Login = () => {
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 mb-3"
+              className="w-full bg-blue-600 p-2 rounded hover:bg-blue-700 mb-3 text-white"
             >
-              {isLogin ? "Login" : "Sign Up"}
+              Login
             </button>
           </form>
 
-          {/* Google Button */}
+          {/* Google */}
           <button
             onClick={handleGoogleLogin}
             className="w-full bg-red-500 text-white p-2 rounded hover:bg-red-600"
@@ -103,13 +96,14 @@ const Login = () => {
             Continue with Google
           </button>
 
+          {/* 🔥 Go to Signup */}
           <p className="text-center mt-4 text-sm">
-            {isLogin ? "New user?" : "Already have account?"}
+            New user?
             <span
-              onClick={() => setIsLogin(!isLogin)}
+              onClick={() => navigate("/signup")}
               className="text-blue-600 cursor-pointer ml-1"
             >
-              {isLogin ? "Sign Up" : "Login"}
+              Sign Up
             </span>
           </p>
         </div>

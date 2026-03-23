@@ -5,11 +5,12 @@ import Companies from "./pages/Companies";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
-
+import Dashboard from "./components/Dashboard.jsx"
 import PrivateRoute from "./components/PrivateRoute";
 import JobSection from "./jobSection/JobSection";
 import { ThemeContext,  } from "./ThemeContext/ThemeContext";
 import { useContext } from "react";
+import Signup from "./pages/Signup";
 
 const App = () => {
   const {theme} = useContext(ThemeContext)
@@ -30,6 +31,15 @@ const App = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/jobSection" element={<JobSection/>} />
+        <Route path="/signup" element={<Signup/>}/>
+        <Route
+  path="/dashboard"
+  element={
+    <PrivateRoute>
+      <Dashboard />
+    </PrivateRoute>
+  }
+/>
       </Routes>
     
     </div>

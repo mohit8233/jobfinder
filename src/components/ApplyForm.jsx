@@ -53,7 +53,7 @@ const ApplyForm = ({ job, onClose }) => {
         onSubmit={sendEmail}
         className="bg-white p-6 rounded-lg w-96 space-y-3"
       >
-        <h2 className="text-xl font-bold">Apply for {job.title}</h2>
+        <h2 className="text-xl font-bold text-blue-600">Apply for {job.title}</h2>
 
         <input
           type="text"
@@ -99,7 +99,7 @@ const ApplyForm = ({ job, onClose }) => {
           onChange={handleChange}
         />
 
-        <button className="bg-blue-600 text-white px-4 py-2 rounded w-full">
+        <button className="bg-blue-600  px-4 py-2 rounded w-full">
           Submit Application
         </button>
 

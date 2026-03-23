@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const Talent = () => {
   return (
-    <section className="w-full min-h-screen bg-[#f8fbff] flex items-center justify-center overflow-hidden">
+    <section className="w-full min-h-screen flex items-center justify-center overflow-hidden">
       <div className="w-[85%] max-w-[1200px] flex flex-col lg:flex-row items-center justify-between gap-12">
 
         {/* LEFT */}
@@ -29,7 +29,7 @@ const Talent = () => {
           transition={{ duration: 1, delay: 0.2 }}
           className="flex-1"
         >
-          <h1 className="text-[42px] font-bold text-[#0b1c39] leading-tight mb-5">
+          <h1 className="text-[42px] font-bold  leading-tight mb-5">
             We Build Lasting <br />
             Relationships <br />
             Between Candidates <br />
